@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
-    "height": 400,
+    "width": 400,
+    "height": 300,
     "title": "Happiness Score by Country (2016)",
     "data": {
         "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
