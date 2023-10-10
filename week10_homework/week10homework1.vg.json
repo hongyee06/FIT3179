@@ -1,0 +1,142 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 400,
+    "title": "Happiness Score by Country (2016)",
+    "data": {
+        "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
+        },
+    "params":[
+        {
+            "name": "Region_selection",
+            "bind": {
+            "input": "select",
+            "options": [
+            null,
+            "Sub-Saharan Africa",
+            "Southern Asia",
+            "Southeastern Asia",
+            "North America",
+            "Middle East and Northern Africa",
+            "Latin America and Caribbean",
+            "Eastern Asia",
+            "Central and Eastern Europe",
+            "Australia and New Zealand"
+            ],
+            "labels":[
+            "Show All",
+            "Sub-Saharan Africa",
+            "Southern Asia",
+            "Southeastern Asia",
+            "North America",
+            "Middle East and Northern Africa",
+            "Latin America and Caribbean",
+            "Eastern Asia",
+            "Central and Eastern Europe",
+            "Australia and New Zealand"
+            ],
+            "name": "Region Selection: "
+            }
+            }
+            
+            ],
+    "transform": [{
+        "filter": "Region_selection == null || datum.Region == Region_selection"
+        }
+
+    ],
+    "encoding": {
+        "x": {
+            "field": "Score",
+            "type": "quantitative",
+            "title": "Happiness Score"
+        },
+        "y": {
+            "field": "GDP per capita",
+            "type": "quantitative"
+        }
+    },
+    "layer":[
+        {           
+    "mark": "circle",
+    "encoding":{
+        "color": {
+            "field": "Region",
+            "type": "nominal",
+            "scale" : {
+                "domain":[
+                    "Sub-Saharan Africa",
+                    "Southern Asia",
+                    "Southeastern Asia",
+                    "North America",
+                    "Middle East and Northern Africa",
+                    "Latin America and Caribbean",
+                    "Eastern Asia",
+                    "Central and Eastern Europe",
+                    "Australia and New Zealand"
+                ],
+                "range":[
+                    "#e41a1c",
+                    "#984ea3",
+                    "#ff7f00",
+                    "#a6cee3",
+                    "#377eb8",
+                    "#a65628",
+                    "#4daf4a",
+                    "#f781bf",
+                    "#66c2a5"
+                ]
+            }
+        },
+        
+        "size": {
+            "field": "Happiness Rank",
+            "type": "quantitative",
+            "sort": "descending",
+            "scale": {
+                "type": "threshold",
+                "domain": [30, 50, 70, 90, 150],
+                "range": [50, 150, 200, 300, 400]
+                }
+            
+        },
+        "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Happiness Rank", "type": "quantitative", "format": ","},
+            {"field": "Score", "type": "quantitative", "format": ",","title":"Happiness Score"},
+            {"field": "GDP per capita", "type": "quantitative", "format": ","}      
+          ]
+    }
+    },
+    {
+        "mark": {
+            "type": "text",
+            "align": "right",
+            "baseline": "middle",
+            "dx": -12,
+            "fontSize": 11.5,
+            "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {"field": "Country", "type": "nominal"},
+                "color": {"value": "black"},
+                "opacity": {
+                "condition": {
+                    "test": "datum['Country'] == 'China' || datum['Country'] == 'Singapore' || datum['Country'] == 'Australia' || datum['Country'] == 'New Zealand' || datum['Country'] == 'Qatar' || datum['Country'] == 'Yemen' || datum['Country'] == 'United States'",
+                    "value": 1
+                },
+                "value": 0
+                },
+                "tooltip": [
+                    {"field": "Country", "type": "nominal"},
+                    {"field": "Happiness Rank", "type": "quantitative", "format": ","},
+                    {"field": "Score", "type": "quantitative", "format": ",","title":"Happiness Score"},
+                    {"field": "GDP per capita", "type": "quantitative", "format": ","}  
+                ]
+                    
+    }
+}
+]
+
+   
+}
