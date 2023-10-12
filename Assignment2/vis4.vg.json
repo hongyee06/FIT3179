@@ -1,0 +1,165 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Parallel coordinates plot showing dimensions of World Happiness Report.",
+    "width": 700,
+    "height": 400,
+    "padding": 5,
+  
+    "config": {
+      "axisY": {
+        "titleX": 10,
+        "titleY": 410,
+        "titleAngle": 0,
+        "titleAlign": "right",
+        "titleBaseline": "top"
+      }
+    },
+  
+    "data": [
+      {
+        "name": "happiness",
+        "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      {
+        "name": "fields",
+        "values": [
+          "Score",
+          "GDP per capita",
+          "Family",
+          "Life Expentancy",
+          "Freedom",
+          "Government Corruption",
+          "Generosity",
+          "Dystopia Residual"
+        ]
+      }
+    ],
+  
+    "scales": [
+      {
+        "name": "ord", "type": "point",
+        "range": "width", "round": true,
+        "domain": {"data": "fields", "field": "data"}
+      },
+      {
+        "name": "Score", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Score"}
+      },
+      {
+        "name": "GDP per capita", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "GDP per capita"}
+      },
+      {
+        "name": "Family", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Family"}
+      },
+      {
+        "name": "Life Expentancy", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Life Expentancy"}
+      },
+      {
+        "name": "Freedom", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Freedom"}
+      },
+      {
+        "name": "Government Corruption", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Government Corruption"}
+      },
+      {
+        "name": "Generosity", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Generosity"}
+      },
+      {
+        "name": "Dystopia Residual", "type": "linear",
+        "range": "height", "zero": false, "nice": true,
+        "domain": {"data": "happiness", "field": "Dystopia Residual"}
+      }
+    ],
+  
+    "axes": [
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Score", "title": "Happness Score",
+        "offset": {"scale": "ord", "value": "Score", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "GDP per capita", "title": "GDP per capita",
+        "offset": {"scale": "ord", "value": "GDP per capita", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Family", "title": "Family",
+        "offset": {"scale": "ord", "value": "Family", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Life Expentancy", "title": "Life Expectancy",
+        "offset": {"scale": "ord", "value": "Life Expentancy", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Freedom", "title": "Freedom",
+        "offset": {"scale": "ord", "value": "Freedom", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Government Corruption", "title": "Government Corruption",
+        "offset": {"scale": "ord", "value": "Government Corruption", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Generosity", "title": "Generosity",
+        "offset": {"scale": "ord", "value": "Generosity", "mult": -1},
+        "titleAlign": "center"
+      },
+      {
+        "orient": "left", "zindex": 1,
+        "scale": "Dystopia Residual", "title": "Dystopia Residual",
+        "offset": {"scale": "ord", "value": "Dystopia Residual", "mult": -1},
+        "titleAlign": "center"
+      }
+    ],
+  
+    "marks": [
+      {
+        "type": "group",
+        "from": {"data": "happiness"},
+        "marks": [
+          {
+            "type": "line",
+            "from": {"data": "fields"},
+            "encode": {
+              "enter": {
+                "x": {"scale": "ord", "field": "data"},
+                "y": {
+                  "scale": {"datum": "data"},
+                  "field": {"parent": {"datum": "data"}}
+                },
+                "stroke": {"value": "steelblue"},
+                "strokeWidth": {"value": 1.01},
+                "strokeOpacity": {"value": 0.3}
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

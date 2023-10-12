@@ -1,0 +1,22 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 400,
+    "data": {
+        "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
+    },
+    "mark": "boxplot",
+    "encoding": {
+      "y": {
+        "field": "Region",
+        "type": "ordinal"
+      },
+      "x": {
+        "field": "Score",
+        "type": "quantitative",
+        "scale": {
+          "domain": [2.5, 8]
+        }
+      }
+    }
+}
