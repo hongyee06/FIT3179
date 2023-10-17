@@ -3,7 +3,7 @@
     "data": {
     "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
   },
-  "width": 700,
+  "width": "container",
   "height": 400,
   "params": [
     {
