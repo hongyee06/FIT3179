@@ -4,14 +4,14 @@
   "data": {
     "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
   },
-  "width": 700,
-  "height": 300,
+  "width": "container",
+  "height": 400,
   "params": [
     {
       "name": "search_input",
       "bind": {
         "input": "search",
-        "placeholder": "Country name",
+        "placeholder": "Country",
         "name": "Search Country"
       },
       "value": ""
@@ -21,7 +21,7 @@
     {"window": [{"op": "count", "as": "index"}]},
     {
       "calculate": "datum.Score",
-      "as": "Score"
+      "as": "Happiness Score"
     },
     {
       "calculate": "datum.GDP_per_capita",
@@ -32,7 +32,7 @@
       "as": "Family"
     },
     {
-      "calculate": "datum.Life_Expectancy",
+      "calculate": "datum.Life_Expentancy",
       "as": "Life Expectancy"
     },
     {
@@ -41,7 +41,7 @@
     },
     {
       "calculate": "datum.Government_Corruption",
-      "as": "Government Corruption"
+      "as": "Corruption"
     },
     {
       "calculate": "datum.Generosity",
@@ -51,7 +51,7 @@
       "calculate": "datum.Dystopia_Residual",
       "as": "Dystopia Residual"
     },
-    {"fold": ["Score", "GDP per capita", "Family", "Life Expectancy", "Freedom", "Government Corruption", "Generosity", "Dystopia Residual"]
+    {"fold": ["Happiness Score", "GDP per capita", "Family", "Life Expectancy", "Freedom", "Corruption", "Generosity", "Dystopia Residual"]
     },
     {
       "calculate": "format(datum.value,'.2f')",
@@ -128,9 +128,6 @@
               "#bcbd22",
               "#17becf"
             ]
-          },
-          "legend": {
-            "orient": "top-right"
           }
         },
         "detail": {"type": "nominal", "field": "index"},
@@ -139,10 +136,10 @@
             "test": {
               "and": [
                 {"param": "region_highlight"},
-                "test(regexp(search_input, 'i'), datum.Country_Name)"
+                "test(regexp(search_input, 'i'), datum.Country)"
               ]
             },
-            "value": 0.5
+            "value": 0.3
           },
           "value": 0.05
         },
@@ -155,32 +152,28 @@
         "tooltip": [
           {
             "type": "nominal",
-            "field": "Country_Name",
-            "title": "Country"
+            "field": "Country"
           },
           {
             "type": "quantitative",
             "field": "Score",
-            "title": "Score",
-            "format": ".3f"
+            "title": "Happiness Score",
+            "format": ".2f"
           },
           {
             "type": "quantitative",
-            "field": "Life_Ladder",
-            "title": "Life Ladder",
-            "format": ".3f"
+            "field": "Life Expentancy",
+            "format": ".2f"
           },
           {
             "type": "quantitative",
-            "field": "Perceptions_Of_Corruption",
-            "title": "Perceptions of Corruption",
-            "format": ".3f"
+            "field": "Freedom",
+            "format": ".2f"
           },
           {
             "type": "quantitative",
-            "field": "Social_Support",
-            "title": "Social Support",
-            "format": ".3f"
+            "field": "Government Corruption",
+            "format": ".2f"
           }
         ]
       }

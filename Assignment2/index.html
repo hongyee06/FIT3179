@@ -31,25 +31,48 @@
     <!-- pure grid group -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <h1>World Happiness Score</h1>
+        <h1>Happiness Unveiled: A Worldwide Happiness Analysis for 2016
+        </h1>
       </div>
     </div>
     <!-- end pure grid group -->
 
     <!-- pure grid group -->
     <div class="pure-g">
-        <div class="pure-u-1-2">
-          
-          <div class="description description-left">
-            <h2>First Visualisation</h2>
+      <div class="pure-u-1-1">
+        <p>Welcome to the World <b>Happiness</b> Report Visualization Portal! Explore the fascinating world of global <b>happiness</b> 
+          through a series of interactive graphs and charts based on the renowned World Happiness Report. This collection of visualizations
+           delves deep into the factors influencing <b>happiness</b> levels across countrie
+           s and regions, offering insights into well-being, economics, social support, and more.
+          <br>
+          <br>
+
+          Join me on a journey to uncover the secrets of <b>happiness</b> worldwide.</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+    <hr>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2>Mapping World Happiness Score by Country</h2>
+      </div>
+      <div class="pure-u-1-1">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+    </div>
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div class="description">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
-          </div>
-        </div>
-        <div class="pure-u-1-2">
-          <div id="vis1" class="vis-container"></div>
+              
+              Our chloropleth map provides a captivating visual representation of <b>happiness</b> scores across countries. Each nation is color-coded, with darker shades indicating higher
+               <b>happiness</b> scores and lighter shades representing lower scores. Dive into this map to gain a quick overview of global <b>happiness</b> distribution, 
+               showcasing regions of prosperity and areas facing well-being challenges. </p>
+              
+              <p class="additional-text">The slider can be used to filter countries based on minimum happiness score</p>
+            </div>
         </div>
     </div>
     <!-- end pure grid group -->
@@ -61,10 +84,13 @@
         </div>
         <div class="pure-u-1-3">
           <div class="description description-right">
-            <h2>Second Visualisation</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed.</p>
+            <p>This histogram zooms in on the top 10 and bottom 10 countries in terms of <b>happiness</b> scores. It offers a concise comparison of the happiest and least happy nations, 
+              allowing you to explore the factors contributing to their rankings. Discover what sets these countries apart on the <b>happiness</b> scale.</p>
+              <p> In case it wasn't clear from the map above, we can see that Denmark has the highest <b>happiness</b> score followed by Switzerland. The least happy country is 
+                Burundi with a lowest score of 2.905.
+              </p>
+            <p class="additional-text">The checkbox can be used to filter top 10 and bottom 10 countries</p>
+
           </div>
         </div>
   
@@ -75,11 +101,10 @@
     <div class="pure-g">
       <div class="pure-u-1-3">
         <div class="description description-left">
-          <h2>Third Visualisation</h2>
+          <h2>Boxplot</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
+            Our boxplot provides a comprehensive view of <b>happiness</b> scores across different regions. Each box represents an individual region, showcasing the interquartile range of scores, the median, and the range of <b>happiness</b> levels within each region. 
+            Uncover the variations in <b>happiness</b> across different parts of the world and gain insights into regional well-being disparities. </p>
         </div>
       </div>
       <div class="pure-u-2-3">
@@ -87,37 +112,67 @@
       </div>
     </div>
     <!-- end pure grid group -->
+
     <!-- pure grid group -->
     <div class="pure-g">
         <div class="pure-u-1-4">
           <div class="description description-left">
             <h2>Fourth Visualisation</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Massa sapien faucibus et molestie ac feugiat sed. </p>
+              The bubble plot illustrates the relationship between a country's GDP per capita and its <b>happiness</b> score. 
+              Each bubble represents a nation, with the bubble size indicating its population. Explore how economic prosperity influences <b>happiness</b> 
+              levels and discover intriguing outliers that challenge conventional wisdom. </p>
+
+              <p class="additional-text">The drop down menu below the graph allows you to choose the region you would like to see.</p>
+
           </div>
         </div>
-        <div class="pure-u-1-2">
+        <div class="pure-u-3-4">
           <div id="vis4" class="vis-container"></div>
         </div>
       </div>
       <!-- end pure grid group -->
+      
+      <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div id="vis5" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-1">
+        <div class="description">
+          <h2>Fourth Visualisation</h2>
+          <p>
+            Our parallel coordinates plot offers a holistic view of the various factors contributing to a 
+            country's <b>happiness</b> score. Each line represents a nation, weaving through axes that represent attributes such as "Happiness Score" ,
+            "GDP per capita," "Family," "Life Expectancy," "Freedom," "Government Corruption," "Generosity," and "Dystopia Residual." 
+            Analyze how these attributes intersect to shape a nation's overall <b>happiness</b>. </p>
 
+            <p class="additional-text">Enter the name of a country you want to focus on in the search bar to view that country's data exclusively.
+            </p>
 
+        </div>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <a href="https://github.com/hongyee06" target="_blank">Hong Yee Lim</a>. </p>
+      </div>
+    </div>
   </div> <!-- end page -->
 
   <script type="text/javascript">
-    var specVis1 = "./vis2.vg.json";
-    var specVis2 = "./vis1.vg.json";
+    var specVis1 = "./vis1.vg.json";
+    var specVis2 = "./vis2.vg.json";
     var specVis3 = "./vis3.vg.json";
     var specVis4 = "./vis4.vg.json";
+    var specVis5 = "./vis5.vg.json";
 
-    vegaEmbed('#vis1', specVis2, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis1', specVis1, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);;
 
-    vegaEmbed('#vis2', specVis1, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis2', specVis5, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
@@ -125,7 +180,11 @@
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
 
-    vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
+    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis5', specVis4, { "actions": false }).then(function (result) {
       // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
     }).catch(console.error);
   </script>
