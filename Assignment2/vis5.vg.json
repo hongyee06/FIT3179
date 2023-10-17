@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
+    },
+    "title": "Happiness Score by Country (2016)",
+    "width": 500,
+    "height": 300,
+    "transform": [
+      {
+        "window": [{"op": "rank", "as": "rank"}],
+        "sort": [{"field": "Score", "order": "descending"}]
+      },
+      {"joinaggregate": [{"op": "max", "field": "rank", "as": "total"}]},
+      {
+        "filter": {
+          "or": [
+            {"and": [
+              {"param": "filterTop10", "equal": true},
+              {"field": "rank", "lte": 10}
+            ]},
+            {"and": [
+              {"param": "filterBottom10", "equal": true},
+              {"field": "rank", "gt": {"expr": "datum.total - 10"}}
+            ]}
+          ]
+        }
+      }
+    ],
+    "params": [
+      {
+        "name": "filterTop10",
+        "value": true,
+        "bind": {
+          "input": "checkbox",
+          "name": "Show Top 10"
+        }
+      },
+      {
+        "name": "filterBottom10",
+        "value": false,
+        "bind": {
+          "input": "checkbox",
+          "name": "Show Bottom 10"
+        }
+      }
+    ],
+    "mark": {
+        "type": "bar",
+        "clip": true
+      },
+      
+    "encoding": {
+      "x": {
+        "field": "Country",
+        "type": "ordinal",
+        "sort": "-y"
+      },
+      "y": {
+        "field": "Score",
+        "type": "quantitative",
+        "scale": {
+          "domain": [2.5, 8]
+        },
+        "title":"Happiness Score"
+      },
+      "color": {
+        "condition": {
+          "test": "datum.rank <= 10",
+          "value": "steelblue"
+        },
+        "value": "salmon"
+      },
+      "tooltip": [
+        {"field": "Country", "type": "ordinal"},
+        {"field": "Score", "type": "quantitative"}
+      ]
+    }
+  }
+  

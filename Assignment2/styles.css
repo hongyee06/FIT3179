@@ -25,12 +25,21 @@ body {
     margin-top: 50px; /* Push the main container down */
 }
 
+.vis-container {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+}
+
 .vis-container, .description {
     background-color: transparent;
     padding: 0;
     margin: 0;
     box-shadow: none;
 }
+
+
+
 .description h2,
 h1 {
     margin-top: 0px;

@@ -1,165 +1,256 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Parallel coordinates plot showing dimensions of World Happiness Report.",
-    "width": 700,
-    "height": 400,
-    "padding": 5,
-  
-    "config": {
-      "axisY": {
-        "titleX": 10,
-        "titleY": 410,
-        "titleAngle": 0,
-        "titleAlign": "right",
-        "titleBaseline": "top"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": null,
+  "data": {
+    "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
+  },
+  "width": 700,
+  "height": 300,
+  "params": [
+    {
+      "name": "search_input",
+      "bind": {
+        "input": "search",
+        "placeholder": "Country name",
+        "name": "Search Country"
+      },
+      "value": ""
+    }
+  ],
+  "transform": [
+    {"window": [{"op": "count", "as": "index"}]},
+    {
+      "calculate": "datum.Score",
+      "as": "Score"
+    },
+    {
+      "calculate": "datum.GDP_per_capita",
+      "as": "GDP per capita"
+    },
+    {
+      "calculate": "datum.Family",
+      "as": "Family"
+    },
+    {
+      "calculate": "datum.Life_Expectancy",
+      "as": "Life Expectancy"
+    },
+    {
+      "calculate": "datum.Freedom",
+      "as": "Freedom"
+    },
+    {
+      "calculate": "datum.Government_Corruption",
+      "as": "Government Corruption"
+    },
+    {
+      "calculate": "datum.Generosity",
+      "as": "Generosity"
+    },
+    {
+      "calculate": "datum.Dystopia_Residual",
+      "as": "Dystopia Residual"
+    },
+    {"fold": ["Score", "GDP per capita", "Family", "Life Expectancy", "Freedom", "Government Corruption", "Generosity", "Dystopia Residual"]
+    },
+    {
+      "calculate": "format(datum.value,'.2f')",
+      "as": "rounded_value"
+    },
+    {
+      "joinaggregate": [
+        {"op": "min", "field": "rounded_value", "as": "min"},
+        {"op": "max", "field": "rounded_value", "as": "max"}
+      ],
+      "groupby": ["key"]
+    },
+    {
+      "calculate": "(datum.rounded_value - datum.min) / (datum.max-datum.min)",
+      "as": "norm_val"
+    },
+    {
+      "calculate": "format((toNumber(datum.min)+toNumber(datum.max)) / 2, '.2f')",
+      "as": "mid"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rule", "color": "#ccc"},
+      "encoding": {
+        "detail": {"aggregate": "count"},
+        "x": {
+          "field": "key",
+          "axis": {
+            "labelPadding": 10
+          }
+        }
       }
     },
-  
-    "data": [
-      {
-        "name": "happiness",
-        "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv",
-        "format": {
-          "type": "csv"
+    {
+      "params": [
+        {
+          "name": "region_highlight",
+          "select": {
+            "type": "point",
+            "fields": ["Region"]
+          },
+          "bind": "legend"
         }
-      },
-      {
-        "name": "fields",
-        "values": [
-          "Score",
-          "GDP per capita",
-          "Family",
-          "Life Expentancy",
-          "Freedom",
-          "Government Corruption",
-          "Generosity",
-          "Dystopia Residual"
-        ]
-      }
-    ],
-  
-    "scales": [
-      {
-        "name": "ord", "type": "point",
-        "range": "width", "round": true,
-        "domain": {"data": "fields", "field": "data"}
-      },
-      {
-        "name": "Score", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Score"}
-      },
-      {
-        "name": "GDP per capita", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "GDP per capita"}
-      },
-      {
-        "name": "Family", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Family"}
-      },
-      {
-        "name": "Life Expentancy", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Life Expentancy"}
-      },
-      {
-        "name": "Freedom", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Freedom"}
-      },
-      {
-        "name": "Government Corruption", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Government Corruption"}
-      },
-      {
-        "name": "Generosity", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Generosity"}
-      },
-      {
-        "name": "Dystopia Residual", "type": "linear",
-        "range": "height", "zero": false, "nice": true,
-        "domain": {"data": "happiness", "field": "Dystopia Residual"}
-      }
-    ],
-  
-    "axes": [
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Score", "title": "Happness Score",
-        "offset": {"scale": "ord", "value": "Score", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "GDP per capita", "title": "GDP per capita",
-        "offset": {"scale": "ord", "value": "GDP per capita", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Family", "title": "Family",
-        "offset": {"scale": "ord", "value": "Family", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Life Expentancy", "title": "Life Expectancy",
-        "offset": {"scale": "ord", "value": "Life Expentancy", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Freedom", "title": "Freedom",
-        "offset": {"scale": "ord", "value": "Freedom", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Government Corruption", "title": "Government Corruption",
-        "offset": {"scale": "ord", "value": "Government Corruption", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Generosity", "title": "Generosity",
-        "offset": {"scale": "ord", "value": "Generosity", "mult": -1},
-        "titleAlign": "center"
-      },
-      {
-        "orient": "left", "zindex": 1,
-        "scale": "Dystopia Residual", "title": "Dystopia Residual",
-        "offset": {"scale": "ord", "value": "Dystopia Residual", "mult": -1},
-        "titleAlign": "center"
-      }
-    ],
-  
-    "marks": [
-      {
-        "type": "group",
-        "from": {"data": "happiness"},
-        "marks": [
+      ],
+      "mark": "line",
+      "encoding": {
+        "color": {
+          "type": "nominal",
+          "field": "Region",
+          "title": "Region",
+          "scale": {
+            "domain": [
+              "Australia and New Zealand",
+              "Central and Eastern Europe",
+              "Eastern Asia",
+              "Latin America and Caribbean",
+              "Middle East and Northern Africa",
+              "North America",
+              "Southeastern Asia",
+              "Southern Asia",
+              "Sub-Saharan Africa",
+              "Western Europe"
+            ],
+            "range": [
+              "#1f77b4",
+              "#ff7f0e",
+              "#2ca02c",
+              "#ff5733",
+              "#9467bd",
+              "#8c564b",
+              "#e377c2",
+              "#7f7f7f",
+              "#bcbd22",
+              "#17becf"
+            ]
+          },
+          "legend": {
+            "orient": "top-right"
+          }
+        },
+        "detail": {"type": "nominal", "field": "index"},
+        "opacity": {
+          "condition": {
+            "test": {
+              "and": [
+                {"param": "region_highlight"},
+                "test(regexp(search_input, 'i'), datum.Country_Name)"
+              ]
+            },
+            "value": 0.5
+          },
+          "value": 0.05
+        },
+        "x": {"type": "nominal", "field": "key"},
+        "y": {
+          "type": "quantitative",
+          "field": "norm_val",
+          "axis": null
+        },
+        "tooltip": [
           {
-            "type": "line",
-            "from": {"data": "fields"},
-            "encode": {
-              "enter": {
-                "x": {"scale": "ord", "field": "data"},
-                "y": {
-                  "scale": {"datum": "data"},
-                  "field": {"parent": {"datum": "data"}}
-                },
-                "stroke": {"value": "steelblue"},
-                "strokeWidth": {"value": 1.01},
-                "strokeOpacity": {"value": 0.3}
-              }
-            }
+            "type": "nominal",
+            "field": "Country_Name",
+            "title": "Country"
+          },
+          {
+            "type": "quantitative",
+            "field": "Score",
+            "title": "Score",
+            "format": ".3f"
+          },
+          {
+            "type": "quantitative",
+            "field": "Life_Ladder",
+            "title": "Life Ladder",
+            "format": ".3f"
+          },
+          {
+            "type": "quantitative",
+            "field": "Perceptions_Of_Corruption",
+            "title": "Perceptions of Corruption",
+            "format": ".3f"
+          },
+          {
+            "type": "quantitative",
+            "field": "Social_Support",
+            "title": "Social Support",
+            "format": ".3f"
           }
         ]
       }
-    ]
+    },
+    {
+      "encoding": {
+        "x": {"type": "nominal", "field": "key"},
+        "y": {"value": 0}
+      },
+      "layer": [
+        {
+          "mark": {"type": "text", "style": "label"},
+          "encoding": {
+            "text": {"aggregate": "max", "field": "max"}
+          }
+        },
+        {
+          "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+        }
+      ]
+    },
+    {
+      "encoding": {
+        "x": {"type": "nominal", "field": "key"},
+        "y": {"value": 150}
+      },
+      "layer": [
+        {
+          "mark": {"type": "text", "style": "label"},
+          "encoding": {
+            "text": {"aggregate": "min", "field": "mid"}
+          }
+        },
+        {
+          "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+        }
+      ]
+    },
+    {
+      "encoding": {
+        "x": {
+          "type": "nominal",
+          "field": "key"
+        },
+        "y": {"value": 300}
+      },
+      "layer": [
+        {
+          "mark": {"type": "text", "style": "label"},
+          "encoding": {
+            "text": {"aggregate": "min", "field": "min"}
+          }
+        },
+        {
+          "mark": {"type": "tick", "style": "tick", "size": 8, "color": "#ccc"}
+        }
+      ]
+    }
+  ],
+  "config": {
+    "axisX": {
+      "domain": false,
+      "labelAngle": 0,
+      "tickColor": "#ccc",
+      "title": null
+    },
+    "view": {"stroke": null},
+    "style": {
+      "label": {"baseline": "middle", "align": "right", "dx": -5},
+      "tick": {"orient": "horizontal"}
+    }
   }
-  
+}

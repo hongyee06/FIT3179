@@ -1,22 +1,60 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 700,
-    "height": 400,
-    "data": {
-        "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
-    },
-    "mark": "boxplot",
-    "encoding": {
-      "y": {
-        "field": "Region",
-        "type": "ordinal"
-      },
-      "x": {
-        "field": "Score",
-        "type": "quantitative",
-        "scale": {
-          "domain": [2.5, 8]
-        }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "data": {
+    "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
+  },
+  "mark": {
+    "type": "boxplot",
+    "filled": true,
+    "color": "black"  
+  },
+  "encoding": {
+    "y": {
+      "field": "Region",
+      "type": "ordinal",
+      "sort": {
+        "field": "Region",  
+        "op": "min"  
       }
+    },
+    "x": {
+      "field": "Score",
+      "type": "quantitative",
+      "scale": {
+        "domain": [2.5, 8]
+      }
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Australia and New Zealand",
+          "Central and Eastern Europe",
+          "Eastern Asia",
+          "Latin America and Caribbean",
+          "Middle East and Northern Africa",
+          "North America",
+          "Southeastern Asia",
+          "Southern Asia",
+          "Sub-Saharan Africa",
+          "Western Europe"
+        ],
+        "range": [
+          "#1f77b4",
+          "#ff7f0e",
+          "#2ca02c",
+          "#ff5733",
+          "#9467bd",
+          "#8c564b",
+          "#e377c2",
+          "#7f7f7f",
+          "#bcbd22",
+          "#17becf"
+        ]
+      },
+      "title": "Region" 
     }
+  }
 }
