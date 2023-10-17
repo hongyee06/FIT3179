@@ -39,11 +39,39 @@
             ],
             "name": "Region Selection: "
             }
+            },
+            {
+                "name": "Rank_selection",
+                "bind": {
+                    "input": "select",
+                    "options": [
+                        null,
+                        "1-30",
+                        "31-60",
+                        "61-90",
+                        "91-120",
+                        "121-150",
+                        "151 and above"
+                    ],
+                    "labels": [
+                        "Show All",
+                        "Rank 1-30",
+                        "Rank 31-60",
+                        "Rank 61-90",
+                        "Rank 91-120",
+                        "Rank 121-150",
+                        "Rank 151 and above"
+                    ],
+                    "name": "Happiness Rank Selection: "
+                }
             }
             
             ],
     "transform": [{
         "filter": "Region_selection == null || datum.Region == Region_selection"
+        },
+        {
+            "filter": "Rank_selection == null || (Rank_selection == '1-30' && datum['Happiness Rank'] <= 30) || (Rank_selection == '31-60' && datum['Happiness Rank'] > 30 && datum['Happiness Rank'] <= 60) || (Rank_selection == '61-90' && datum['Happiness Rank'] > 60 && datum['Happiness Rank'] <= 90) || (Rank_selection == '91-120' && datum['Happiness Rank'] > 90 && datum['Happiness Rank'] <= 120) || (Rank_selection == '121-150' && datum['Happiness Rank'] > 120 && datum['Happiness Rank'] <= 150) || (Rank_selection == '151 and above' && datum['Happiness Rank'] > 150)"
         }
 
     ],
