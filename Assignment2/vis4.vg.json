@@ -1,7 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": null,
-  "data": {
+    "data": {
     "url": "https://raw.githubusercontent.com/hongyee06/FIT3179/main/week10_homework/2016.csv"
   },
   "width": "container",
@@ -162,7 +161,7 @@
           },
           {
             "type": "quantitative",
-            "field": "Life Expentancy",
+            "field": "Life Expectancy",
             "format": ".2f"
           },
           {
